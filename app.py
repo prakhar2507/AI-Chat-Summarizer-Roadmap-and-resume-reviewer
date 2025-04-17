@@ -1,13 +1,15 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 from typing import List, Union
+from dotenv import load_dotenv
 import os
 import groq
 import json
 import fitz
 
 app=FastAPI()
+load_dotenv()
 
-client = groq.Groq(api_key='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')
+client = groq.Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # ---------- Chat Extractor ----------
 
