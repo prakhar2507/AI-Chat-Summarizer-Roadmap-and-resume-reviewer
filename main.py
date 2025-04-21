@@ -221,7 +221,7 @@ async def summarize_chat_file(file: UploadFile = File(...)):
     if not file.filename.endswith(".txt"):
         raise HTTPException(status_code=400, detail="Only .txt files are supported.")
     
-    temp_file_path = f"temp_{file.filename}"
+    temp_file_path = f"/tmp/temp_{file.filename}"
     try:
         with open(temp_file_path, "wb") as buffer:
             buffer.write(await file.read())
