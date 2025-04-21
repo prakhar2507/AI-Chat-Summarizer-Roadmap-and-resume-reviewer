@@ -180,12 +180,12 @@ def resume_reviewer(content: str) -> dict:
                     "  ],\n"
                     "  \"improved_resume\": \"<Improved resume text here>\"\n"
                     "}\n\n"
-                    "Rules:\n"
-                    "- Do NOT return markdown or code block formatting.\n"
-                    "- Output must be valid JSON.\n"
-                    "- Be consistent across different resumes.\n"
-                    "- Never fabricate data. Only improve what's provided."
-                    "- Do NOT include unescaped line breaks in strings\n"
+                    "**STRICT RULES**:\n"
+                            "1. Escape ALL control characters with \\n, \\t etc.\n"
+                            "2. No unescaped newlines in JSON strings\n"
+                            "3. Use double quotes ONLY\n"
+                            "4. Never wrap response in markdown\n"
+                            "5. Validate JSON with jsonlint.com before responding"
                 )
             },
             {
@@ -193,7 +193,8 @@ def resume_reviewer(content: str) -> dict:
                 "content": f"Resume: {content}"
             }
         ],
-        model="llama3-70b-8192"
+        model="llama3-70b-8192",
+        response_format={"type":"json_object"}
     )
 
     response_text = chat_completion.choices[0].message.content.strip()
