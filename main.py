@@ -260,4 +260,31 @@ async def resume_reviewer_endpoint(file: UploadFile = File(...)):
 
 @app.get("/")
 def read_root():
-    return {"response": "KYA KAR RAHA HAI BE SAHI ENDPOINT SE REQUEST BHEJ"}
+    return {
+  "response": [
+    {
+      "endpoint": "/summarize",
+      "method": "POST",
+      "description": "Summarize mentor-mentee chat from a `.txt` file",
+      "input_type": "File (.txt)"
+    },
+    {
+      "endpoint": "/career-roadmap",
+      "method": "GET",
+      "description": "Generate a career roadmap based on level and question",
+      "input_type": "Query params"
+    },
+    {
+      "endpoint": "/resume-reviewer",
+      "method": "POST",
+      "description": "Review and improve a resume from a `.pdf` file",
+      "input_type": "File (.pdf)"
+    },
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "description": "Health check / Root endpoint",
+      "input_type": "-"
+    }
+  ]
+}
